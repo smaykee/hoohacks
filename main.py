@@ -60,6 +60,10 @@ def options():
     while running:
         screen.fill(BLACK)  # Change background color or draw gameplay elements
         draw_text("Options", font, WHITE, SCREEN_WIDTH // 2, 50)
+
+        draw_text("First Year Fumbles", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
+        draw_text("Press Enter to Start", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        draw_text("Press Esc to Quit", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT * 3 // 4)
         pygame.display.update()
 
 
