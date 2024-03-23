@@ -20,6 +20,9 @@ pygame.display.set_caption("Oregon Trail Game")
 # Font settings
 font = pygame.font.Font(None, 36)
 
+# Load sounds
+button_click_sound = pygame.mixer.Sound("Walking Towards A Stream.wav")
+
 def draw_text(text, font, color, x, y):
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
@@ -41,6 +44,8 @@ def main_menu():
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    # Play button click sound
+                    button_click_sound.play()
                     # Start the game or go to the main gameplay loop
                     return
                 elif event.key == pygame.K_ESCAPE:
@@ -48,4 +53,9 @@ def main_menu():
                     sys.exit()
 
 if __name__ == "__main__":
+    # Initialize the mixer for sound
+    pygame.mixer.init()
+    # Load sound files
+    button_click_sound = pygame.mixer.Sound("Walking Towards A Stream.wav")
+    button_click_sound.play()
     main_menu()
