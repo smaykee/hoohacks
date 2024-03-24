@@ -4,7 +4,9 @@ import pygame
 import sys
 import random
 
-from main import *
+import main
+from checkpoint_handler import BLACK, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
+from main import screen
 
 start_game_menu = ["1. Pull an all-nighter", "2. Take a nap", "3. Exercise", "4. Shop/eat out",
                    "5. Hang out with friends",
@@ -29,7 +31,7 @@ def start_game():
                 elif event.key == pygame.K_DOWN:
                     selected_option = (selected_option + 1) % len(start_game_menu)
                 elif event.key == pygame.K_RETURN:
-                    handle_option(selected_option)
+                    main.handle_option(selected_option)
                 elif pygame.K_1 <= event.key <= pygame.K_6:  # Check for number keys 1-6
                     num = event.key - pygame.K_1
                     handle_start_game(num)
@@ -47,8 +49,8 @@ def start_game():
             color = main.GREEN if i == selected_option else main.WHITE
             main.draw_text(option, main.font, color, main.SCREEN_WIDTH // 2, 150 + i * 50)
 
-        draw_text("Quit (Press 'q')", main.font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 60)
-        draw_text("Go back (Press 'b')", main.font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 30)
+        main.draw_text("Quit (Press 'q')", main.font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 60)
+        main.draw_text("Go back (Press 'b')", main.font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 30)
         # print("Starting the game...")
         pygame.display.update()
 

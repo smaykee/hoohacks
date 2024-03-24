@@ -1,1 +1,1 @@
-{"gpa": 4.0, "mental_health": 69, "physical_health": 81}
+{"gpa": 4.0, "mental_health": 86, "physical_health": 65}

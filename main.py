@@ -3,7 +3,8 @@ import textwrap
 import pygame
 import sys
 
-from options import *
+#from options import *
+import list
 from gameplay import *
 
 # Initialize Pygame
@@ -98,7 +99,7 @@ def handle_option(option_index):
     if selected_option_text == "1. Begin Your Journey...":
         gameplay_screen()
     elif selected_option_text == "2. Learn More":
-        options.show_info()
+        list.show_info()
     elif selected_option_text == "3. Turn Back":
         main_menu()
     elif selected_option_text == "4. Exit":
