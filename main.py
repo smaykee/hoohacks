@@ -23,7 +23,10 @@ SCREEN_HEIGHT = 600
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Wahoo Trails")
+
+background_image = pygame.image.load("background.png").convert()
+
+pygame.display.set_caption("First Year Fumbles")
 
 # Font settings
 font = pygame.font.Font(None, 36)
@@ -50,7 +53,9 @@ def main_menu():
         draw_text("Press Enter to Start", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         draw_text("Press Esc to Quit", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT * 3 // 4)
 
+        screen.blit(background_image, (0, 0))
         pygame.display.update()
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
