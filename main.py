@@ -20,6 +20,7 @@ RED = (255, 0, 0)
 
 background_image = pygame.image.load("background.png").convert_alpha()
 
+retro_font = pygame.font.Font("PressStart2P-Regular.ttf", 30)
 # Screen dimensions
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -28,10 +29,11 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # Font settings
-font = pygame.font.Font(None, 36)
+font = retro_font
 
 # Initialize the mixer for sound
 pygame.mixer.init()
+
 # Load sound files
 button_click_sound = pygame.mixer.Sound("Walking Towards A Stream.wav")
 
