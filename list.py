@@ -1,14 +1,13 @@
 import textwrap
-
+import time
 import pygame
 import sys
 import random
 
-import time
 import main
 from checkpoint_handler import BLACK, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
 from main import screen
-
+from event_handler import handle_list_event
 
 start_game_menu = ["1. Pull an all-nighter", "2. Take a nap", "3. Exercise", "4. Shop/eat out",
                    "5. Hang out with friends",
@@ -61,16 +60,26 @@ def handle_start_game(start_index):
     selected_start_index = start_game_menu[start_index]
     if selected_start_index == "1. Pull an all-nighter":
         all_nighter()
+        handle_list_event(selected_start_index, -1)
     if selected_start_index == "2. Take a nap":
         nap()
+        handle_list_event(selected_start_index, 2)
     if selected_start_index == "3. Exercise":
         exercise()
+        handle_list_event(selected_start_index, 3)
     if selected_start_index == "4. Shop/eat out":
         shop()
+        handle_list_event(selected_start_index, 5)
     if selected_start_index == "5. Hang out with friends":
-        hang_out()
+        if hang_out():
+            handle_list_event(selected_start_index, 10)
+        else:
+            handle_list_event(selected_start_index, 0)
     if selected_start_index == "6. Stop to party":
-        party()
+        if not party():
+            handle_list_event(selected_start_index, -20)
+        else:
+            handle_list_event(selected_start_index, 15)
 
 
 def all_nighter():
@@ -230,8 +239,10 @@ def hang_out():
                         if 1 <= guess <= 10:
                             if guess == target_number:
                                 result_text = "Congratulations! You get to hang out with your friends!"
+                                return True
                             else:
                                 result_text = "Sorry, your friends are busy today. Try again next time."
+                                return False
                             # Display the result
                             main.draw_text(result_text, main.font, main.WHITE, main.SCREEN_WIDTH // 2,
                                            main.SCREEN_HEIGHT // 2 + 100)
@@ -363,11 +374,10 @@ def party():
         pygame.display.update()
         clock.tick(50)  # Limit frame rate to 30 FPS
 
-        # Game over condition (time runs out)...
+        # Game over condition (time runs out)
         if time.time() - start_time >= game_duration:
             running = False
-
-
+            return False
 
 
 def show_info():
