@@ -271,6 +271,7 @@ def party():
 
     start_time = time.time()
     game_duration = 40
+    remaining_time = game_duration
 
     # Platform variables
     platform_width = 100
@@ -291,6 +292,8 @@ def party():
     points = 0
     font_points = pygame.font.Font(None, 24)
 
+    font_timer = pygame.font.Font(None, 24)
+
     while running:
         screen.fill(main.BLACK)
 
@@ -309,6 +312,8 @@ def party():
 
         # Ensure platform stays within screen bounds
         platform_x = max(0, min(main.SCREEN_WIDTH - platform_width, platform_x))
+
+        remaining_time = max(0, game_duration - int(time.time() - start_time))
 
         # Spawn falling objects randomly
         if random.randint(1, 100) == 1:
@@ -350,6 +355,10 @@ def party():
         # Draw points
         points_text = font_points.render(f"Points: {points}", True, main.WHITE)
         screen.blit(points_text, (main.SCREEN_WIDTH - points_text.get_width() - 10, 10))
+
+        #Draw timer
+        timer_text = font_timer.render(f"Time: {remaining_time}s", True, main.WHITE)
+        screen.blit(timer_text, (10, 10))
 
         pygame.display.update()
         clock.tick(50)  # Limit frame rate to 30 FPS
