@@ -3,6 +3,9 @@ import textwrap
 import pygame
 import sys
 
+from options import *
+from gameplay import *
+
 # Initialize Pygame
 pygame.init()
 
@@ -10,6 +13,7 @@ pygame.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
+RED = (255, 0, 0)
 
 # Screen dimensions
 SCREEN_WIDTH = 800
@@ -29,11 +33,13 @@ button_click_sound = pygame.mixer.Sound("Walking Towards A Stream.wav")
 
 options_list = ["1. Begin Your Journey...", "2. Learn More", "3. Turn Back", "4. Exit"]
 
+
 def draw_text(text, font, color, x, y):
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
     text_rect.center = (x, y)
     screen.blit(text_surface, text_rect)
+
 
 def main_menu():
     while True:
@@ -57,6 +63,7 @@ def main_menu():
                 elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+
 
 def options():
     running = True
@@ -85,68 +92,18 @@ def options():
                     num = event.key - pygame.K_1
                     handle_option(num)
 
+
 def handle_option(option_index):
     selected_option_text = options_list[option_index]
     if selected_option_text == "1. Begin Your Journey...":
-        start_game()
+        gameplay_screen()
     elif selected_option_text == "2. Learn More":
-        show_info()
+        options.show_info()
     elif selected_option_text == "3. Turn Back":
         main_menu()
     elif selected_option_text == "4. Exit":
         pygame.quit()
         sys.exit()
-
-def start_game():
-    # Add code for starting the game or switching to the gameplay screen
-    # while True:
-    running = True
-    while running:
-        # Handle events and update game state
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
-        screen.fill(BLACK)
-
-        draw_text("Starting the game...", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
-        # print("Starting the game...")
-        pygame.display.update()
-
-def show_info():
-    # Add code for showing information about the game or credits
-    running = True
-    selected_option = 0
-    while running:
-        # Handle events and update game state
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_b:
-                    options()
-
-        screen.fill(BLACK)
-
-        info_text = ("This game will show you the ups and downs of being a freshman... or first year... at UVA. "
-                     "Proceed with caution...")
-        # Split the long text into lines that fit the screen width
-        info_lines = textwrap.wrap(info_text, width=60)
-
-        # Display each line of the wrapped text
-        y_offset = SCREEN_HEIGHT // 4  # Initial Y position for the text
-        for line in info_lines:
-            draw_text(line, font, WHITE, SCREEN_WIDTH // 2, y_offset)
-            y_offset += 30  # Increase Y offset for the next line
-
-        back_text = "Press 'b' to go back"
-        back_color = GREEN if selected_option == len(options_list) else WHITE
-        draw_text(back_text, font, back_color, SCREEN_WIDTH // 2, 150 + len(options_list) * 50)
-        pygame.display.update()
-
 
 
 def main():
@@ -159,6 +116,7 @@ def main():
                 pygame.mixer.stop()  # Stop main menu music if playing
         elif current_state == "options":
             options()
+
 
 if __name__ == "__main__":
     main()
