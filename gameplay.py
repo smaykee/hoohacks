@@ -127,6 +127,7 @@ def gameplay_screen():
                 checkpoint_index += 1
                 break
             else:
+                check_stats()
                 # If no checkpoint is reached, increment the date and days passed
                 if not event_popup_active:
                     days_passed += 1
@@ -136,7 +137,7 @@ def gameplay_screen():
                 pygame.display.update()
 
                 # Add a delay to control the game's speed
-                pygame.time.delay(300)  # Adjust the delay as needed
+                pygame.time.delay(100)  # Adjust the delay as needed
 
                 # Random events
                 if random.random() < 0.05:

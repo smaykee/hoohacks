@@ -17,6 +17,7 @@ BLACK = (0, 0, 0)
 # Define font
 font = pygame.font.Font(None, 36)
 
+
 def game_over_screen():
     running = True
     while running:
@@ -47,6 +48,7 @@ def game_over_screen():
 
         # Update the display
         pygame.display.update()
+
 
 # Run the game over screen
 if __name__ == "__main__":

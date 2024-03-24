@@ -3,7 +3,7 @@ import random
 import pygame
 import sys
 import json
-import main
+import list
 
 pygame.init()
 
@@ -73,6 +73,7 @@ def handle_event(event_data, gpa, mental_health, physical_health):
     elif event_data["name"] == "Contracted an illness":
         physical_health -= random.randint(10, 30)  # Drop physical health by random integer between 10-30
 
+
     # Ensure stats are within bounds (0-100 for mental and physical health)
     gpa = max(gpa, 0)  # Ensure GPA doesn't go below 0
     mental_health = max(mental_health, 0)  # Ensure mental health doesn't go below 0
@@ -80,3 +81,5 @@ def handle_event(event_data, gpa, mental_health, physical_health):
 
     # Write updated stats to file
     write_to_file({"gpa": gpa, "mental_health": mental_health, "physical_health": physical_health})
+
+

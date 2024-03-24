@@ -1,11 +1,5 @@
-import random
-
-import pygame
-import sys
-import json
-import main
 from gameplay import *
-from list import *
+
 # Initialize Pygame
 pygame.init()
 
@@ -45,6 +39,7 @@ def display_text(text, color, x, y):
 
 
 def handle_checkpoint_screen(checkpoint_index):
+    from list import start_game
     checkpoints_dict = [
         {"name": "First Day of Classes", "date": "08-27-2024"},
         {"name": "Midterm Exams", "date": "10-15-2024"},
@@ -69,11 +64,8 @@ def handle_checkpoint_screen(checkpoint_index):
                 sys.exit()
             if evt.type == pygame.KEYDOWN:
                 if evt.key == pygame.K_RETURN:
-                    list.start_game() # Exit the loop when user clicks on the popup
+                    start_game()  # Exit the loop when user clicks on the popup
                     pygame.display.update()
 
         # Clear the screen
         screen.fill(WHITE)
-
-
-
