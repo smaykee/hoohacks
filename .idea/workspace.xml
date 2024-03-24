@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fd39774-5e42-456a-a27a-a5ff22208917" name="Changes" comment="commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="4fd39774-5e42-456a-a27a-a5ff22208917" name="Changes" comment="fixed background">
+      <change beforePath="$PROJECT_DIR$/list.py" beforeDir="false" afterPath="$PROJECT_DIR$/list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stats.txt" beforeDir="false" afterPath="$PROJECT_DIR$/stats.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711292464868</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fixed background">
+      <created>1711292645929</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711292645929</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +204,7 @@
     <MESSAGE value="fixing imports" />
     <MESSAGE value="party game is working" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="fixed background" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed background" />
   </component>
 </project>
