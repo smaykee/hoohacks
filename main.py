@@ -22,7 +22,6 @@ SCREEN_HEIGHT = 600
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Wahoo Trails")
 
 # Font settings
 font = pygame.font.Font(None, 36)
