@@ -306,13 +306,11 @@ def party():
             color = object_color_good if is_good else object_color_bad
             objects.append((object_x, object_y, color, is_good))
 
-        # Update falling objects' positions
-        for i in range(len(objects)):
-            object_x, object_y, color, is_good = objects[i]
+        # Update falling objects' positions using a copy of the list
+        for i, (object_x, object_y, color, is_good) in enumerate(objects[:]):  # Use [:] to create a copy of the list
             object_y += object_speed
-            objects[i] = (object_x, object_y, color, is_good)
 
-            # Check for collision with platform
+            # Check for collision with platform and handle points
             if object_y + object_size >= platform_y and object_y <= platform_y + platform_height:
                 if platform_x <= object_x <= platform_x + platform_width or \
                         platform_x <= object_x + object_size <= platform_x + platform_width:
@@ -321,16 +319,18 @@ def party():
                     else:
                         points -= 1
                     objects.pop(i)
-                    break
 
             # Remove objects that have fallen off the screen
             if object_y > main.SCREEN_HEIGHT:
                 objects.pop(i)
 
+            # Update the object's position in the list
+            objects[i] = (object_x, object_y, color, is_good)
+
         # Draw platform
         pygame.draw.rect(screen, platform_color, (platform_x, platform_y, platform_width, platform_height))
 
-        # Draw falling objects
+        # Draw falling objects from the updated list
         for object_x, object_y, color, _ in objects:
             pygame.draw.rect(screen, color, (object_x, object_y, object_size, object_size))
 
@@ -344,6 +344,8 @@ def party():
         # Game over condition (points reach a certain threshold)
         if points <= -10:
             running = False
+
+
 
 
 def show_info():
