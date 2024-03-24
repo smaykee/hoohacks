@@ -374,7 +374,7 @@ def party():
         pygame.display.update()
         clock.tick(50)  # Limit frame rate to 30 FPS
 
-        # Game over condition (time runs out)
+        # Game over condition (time runs out)...
         if time.time() - start_time >= game_duration:
             running = False
             return False
