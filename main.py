@@ -17,6 +17,9 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+
+background_image = pygame.image.load("background.png").convert_alpha()
+
 # Screen dimensions
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -45,9 +48,11 @@ def draw_text(text, font, color, x, y):
 def main_menu():
     while True:
         screen.fill(BLACK)
-        draw_text("First Year Fumbles", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
+        # draw_text("First Year Fumbles", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
         draw_text("Press Enter to Start", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         draw_text("Press Esc to Quit", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT * 3 // 4)
+
+        screen.blit(background_image, (0, 0))
 
         pygame.display.update()
 
