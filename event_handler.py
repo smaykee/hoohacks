@@ -3,6 +3,7 @@ import random
 import pygame
 import sys
 import json
+import main
 
 pygame.init()
 

@@ -4,11 +4,12 @@ import pygame
 import sys
 import random
 
-import main
-from main import handle_option, BLACK, screen, draw_text, font, WHITE, GREEN, SCREEN_WIDTH, SCREEN_HEIGHT
+from main import *
 
-start_game_menu = ["1. Pull an all-nighter", "2. Take a nap", "3. Exercise", "4. Shop/eat out", "5. Hang out with friends",
+start_game_menu = ["1. Pull an all-nighter", "2. Take a nap", "3. Exercise", "4. Shop/eat out",
+                   "5. Hang out with friends",
                    "6. Stop to party"]
+
 
 def start_game():
     # Add code for starting the game or switching to the gameplay screen
@@ -38,7 +39,6 @@ def start_game():
                 elif event.key == pygame.K_b:  # Go back button
                     main.options()
 
-
         screen.fill(BLACK)
 
         # draw_text("Starting the game...", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
@@ -51,6 +51,7 @@ def start_game():
         draw_text("Go back (Press 'b')", main.font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 30)
         # print("Starting the game...")
         pygame.display.update()
+
 
 def handle_start_game(start_index):
     selected_start_index = start_game_menu[start_index]
@@ -66,8 +67,6 @@ def handle_start_game(start_index):
         hang_out()
     if selected_start_index == "6. Stop to party":
         party()
-
-
 
 
 def all_nighter():
@@ -100,6 +99,7 @@ def all_nighter():
         main.draw_text(back_text, main.font, back_color, main.SCREEN_WIDTH // 2, 150 + len(main.options_list) * 50)
         pygame.display.update()
 
+
 def nap():
     running = True
     selected_option = 0
@@ -129,6 +129,7 @@ def nap():
         back_color = main.GREEN if selected_option == len(start_game_menu) else main.WHITE
         main.draw_text(back_text, main.font, back_color, main.SCREEN_WIDTH // 2, 150 + len(main.options_list) * 50)
         pygame.display.update()
+
 
 def exercise():
     running = True
@@ -160,6 +161,7 @@ def exercise():
         main.draw_text(back_text, main.font, back_color, main.SCREEN_WIDTH // 2, 150 + len(main.options_list) * 50)
         pygame.display.update()
 
+
 def shop():
     running = True
     selected_option = 0
@@ -189,6 +191,7 @@ def shop():
         back_color = main.GREEN if selected_option == len(start_game_menu) else main.WHITE
         main.draw_text(back_text, main.font, back_color, main.SCREEN_WIDTH // 2, 150 + len(main.options_list) * 50)
         pygame.display.update()
+
 
 def hang_out():
     running = True
@@ -226,21 +229,24 @@ def hang_out():
                             else:
                                 result_text = "Sorry, your friends are busy today. Try again next time."
                             # Display the result
-                            main.draw_text(result_text, main.font, main.WHITE, main.SCREEN_WIDTH // 2, main.SCREEN_HEIGHT // 2 + 100)
+                            main.draw_text(result_text, main.font, main.WHITE, main.SCREEN_WIDTH // 2,
+                                           main.SCREEN_HEIGHT // 2 + 100)
                             pygame.display.update()
                             pygame.time.delay(2000)  # Delay for 2 seconds before returning to main menu
                             start_game()  # Go back to the main menu after displaying the result
                         else:
                             # Invalid input message
                             result_text = "Invalid input. Please enter a number between 1 and 10."
-                            main.draw_text(result_text, main.font, main.RED, main.SCREEN_WIDTH // 2, main.SCREEN_HEIGHT // 2 + 100)
+                            main.draw_text(result_text, main.font, main.RED, main.SCREEN_WIDTH // 2,
+                                           main.SCREEN_HEIGHT // 2 + 100)
                             pygame.display.update()
                             pygame.time.delay(2000)  # Delay for 2 seconds before clearing the input box
                             guess_input = ""
                     except ValueError:
                         # Invalid input message
                         result_text = "Invalid input. Please enter a number between 1 and 10."
-                        main.draw_text(result_text, main.font, main.RED, main.SCREEN_WIDTH // 2, main.SCREEN_HEIGHT // 2 + 100)
+                        main.draw_text(result_text, main.font, main.RED, main.SCREEN_WIDTH // 2,
+                                       main.SCREEN_HEIGHT // 2 + 100)
                         pygame.display.update()
                         pygame.time.delay(2000)  # Delay for 2 seconds before clearing the input box
                         guess_input = ""
@@ -253,7 +259,6 @@ def hang_out():
         # Handle going back
         if pygame.key.get_pressed()[pygame.K_b]:
             main.options()
-
 
 
 def party():
@@ -344,8 +349,6 @@ def party():
         # Game over condition (points reach a certain threshold)
         if points <= -10:
             running = False
-
-
 
 
 def show_info():
