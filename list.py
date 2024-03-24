@@ -40,7 +40,7 @@ def start_game():
                 elif event.key == pygame.K_q:  # Quit button
                     pygame.quit()
                     sys.exit()
-                elif event.key == pygame.K_b:  # Go back button
+                elif event.key == pygame.K_b:  # Go back button...
                     gameplay.gameplay_screen()
 
         screen.fill(BLACK)
