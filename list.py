@@ -5,6 +5,8 @@ import sys
 import random
 
 import time
+
+import gameplay
 import main
 from checkpoint_handler import BLACK, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
 from main import screen
@@ -41,7 +43,7 @@ def start_game():
                     pygame.quit()
                     sys.exit()
                 elif event.key == pygame.K_b:  # Go back button
-                    main.options()
+                    gameplay.gameplay_screen()
 
         screen.fill(BLACK)
 
