@@ -24,7 +24,7 @@ SCREEN_HEIGHT = 600
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-background_image = pygame.image.load("background.png").convert()
+background_image = pygame.image.load("background.png").convert_alpha()
 
 pygame.display.set_caption("First Year Fumbles")
 
@@ -49,7 +49,7 @@ def draw_text(text, font, color, x, y):
 def main_menu():
     while True:
         screen.fill(BLACK)
-        draw_text("First Year Fumbles", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
+        # draw_text("First Year Fumbles", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4)
         draw_text("Press Enter to Start", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         draw_text("Press Esc to Quit", font, WHITE, SCREEN_WIDTH // 2, SCREEN_HEIGHT * 3 // 4)
 
