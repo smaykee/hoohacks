@@ -19,7 +19,7 @@ def start_game():
     selected_option = 0
     running = True
     while running:
-        # Handle events and update game state
+        # Handle events and update game state...
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
