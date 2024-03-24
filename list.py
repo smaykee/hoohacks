@@ -4,9 +4,11 @@ import pygame
 import sys
 import random
 
+import time
 import main
 from checkpoint_handler import BLACK, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
 from main import screen
+
 
 start_game_menu = ["1. Pull an all-nighter", "2. Take a nap", "3. Exercise", "4. Shop/eat out",
                    "5. Hang out with friends",
@@ -267,6 +269,9 @@ def party():
     running = True
     clock = pygame.time.Clock()
 
+    start_time = time.time()
+    game_duration = 40
+
     # Platform variables
     platform_width = 100
     platform_height = 20
@@ -313,26 +318,27 @@ def party():
             color = object_color_good if is_good else object_color_bad
             objects.append((object_x, object_y, color, is_good))
 
-        # Update falling objects' positions using a copy of the list
-        for i, (object_x, object_y, color, is_good) in enumerate(objects[:]):  # Use [:] to create a copy of the list
+        # Create a new list to store updated objects
+        updated_objects = []
+
+        # Update falling objects' positions using the original list
+        for object_x, object_y, color, is_good in objects:
             object_y += object_speed
 
-            # Check for collision with platform and handle points
+            # Check for collision with platform and handle points for good objects
             if object_y + object_size >= platform_y and object_y <= platform_y + platform_height:
                 if platform_x <= object_x <= platform_x + platform_width or \
                         platform_x <= object_x + object_size <= platform_x + platform_width:
                     if is_good:
-                        points += 1
+                        points += 1  # Increase points for catching good objects
                     else:
-                        points -= 1
-                    objects.pop(i)
+                        points -= 1  # Decrease points for missing bad objects
+                else:
+                    updated_objects.append((object_x, object_y, color, is_good))  # Add object back to updated list
+            elif object_y <= main.SCREEN_HEIGHT:  # Add object back to updated list if it hasn't fallen off
+                updated_objects.append((object_x, object_y, color, is_good))
 
-            # Remove objects that have fallen off the screen
-            if object_y > main.SCREEN_HEIGHT:
-                objects.pop(i)
-
-            # Update the object's position in the list
-            objects[i] = (object_x, object_y, color, is_good)
+        objects = updated_objects  # Replace original list with updated list
 
         # Draw platform
         pygame.draw.rect(screen, platform_color, (platform_x, platform_y, platform_width, platform_height))
@@ -346,11 +352,13 @@ def party():
         screen.blit(points_text, (main.SCREEN_WIDTH - points_text.get_width() - 10, 10))
 
         pygame.display.update()
-        clock.tick(30)  # Limit frame rate to 30 FPS
+        clock.tick(50)  # Limit frame rate to 30 FPS
 
-        # Game over condition (points reach a certain threshold)
-        if points <= -10:
+        # Game over condition (time runs out)
+        if time.time() - start_time >= game_duration:
             running = False
+
+
 
 
 def show_info():

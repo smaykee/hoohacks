@@ -6,6 +6,7 @@ import sys
 #from options import *
 import list
 from gameplay import *
+import time
 
 # Initialize Pygame
 pygame.init()
