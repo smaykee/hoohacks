@@ -3,7 +3,7 @@ import textwrap
 import pygame
 import sys
 
-import options
+from options import *
 from gameplay import *
 
 # Initialize Pygame
