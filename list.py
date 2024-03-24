@@ -212,6 +212,7 @@ def hang_out():
     selected_option = 0
     target_number = random.randint(1, 10)
     guess_input = ""  # Variable to store user input
+    correct_guess = None  # Flag to track if the guess is correct or not
 
     while running:
         screen.fill(BLACK)
@@ -226,6 +227,17 @@ def hang_out():
         pygame.draw.rect(screen, main.WHITE, (main.SCREEN_WIDTH // 2 - 50, main.SCREEN_HEIGHT // 2 + 50, 100, 30))
         main.draw_text(guess_input, main.font, main.BLACK, main.SCREEN_WIDTH // 2, main.SCREEN_HEIGHT // 2 + 65)
 
+        # Display the result if the guess is correct or incorrect
+        if correct_guess is not None:
+            result_text = "Congratulations! You get to hang out with your friends!" if correct_guess else \
+                "Sorry, your friends are busy today. Try again next time."
+            main.draw_text(result_text, main.font, main.WHITE, main.SCREEN_WIDTH // 2,
+                           main.SCREEN_HEIGHT // 2 + 100)
+            pygame.display.update()
+            pygame.time.delay(2000)  # Delay for 2 seconds before returning to main menu
+            start_game()  # Go back to the main menu after displaying the result
+            correct_guess = None  # Reset the flag
+
         pygame.display.update()
 
         # Handle events
@@ -239,17 +251,10 @@ def hang_out():
                         guess = int(guess_input)
                         if 1 <= guess <= 10:
                             if guess == target_number:
-                                result_text = "Congratulations! You get to hang out with your friends!"
-                                return True
+                                correct_guess = True  # Set flag for correct guess
                             else:
-                                result_text = "Sorry, your friends are busy today. Try again next time."
-                                return False
-                            # Display the result
-                            main.draw_text(result_text, main.font, main.WHITE, main.SCREEN_WIDTH // 2,
-                                           main.SCREEN_HEIGHT // 2 + 100)
-                            pygame.display.update()
-                            pygame.time.delay(2000)  # Delay for 2 seconds before returning to main menu
-                            start_game()  # Go back to the main menu after displaying the result
+                                correct_guess = False  # Set flag for incorrect guess
+                            guess_input = ""  # Clear the input box
                         else:
                             # Invalid input message
                             result_text = "Invalid input. Please enter a number between 1 and 10."
@@ -275,6 +280,7 @@ def hang_out():
         # Handle going back
         if pygame.key.get_pressed()[pygame.K_b]:
             main.options()
+
 
 
 def party():
