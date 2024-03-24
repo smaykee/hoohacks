@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from checkpoint_handler import *
 from event_handler import *
 from gameover import *
+from main import *
 
 # Initialize Pygame
 pygame.init()
@@ -14,7 +15,6 @@ pygame.init()
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("College Trails")
 
 # Define colors
 WHITE = (255, 255, 255)
@@ -25,7 +25,7 @@ font = pygame.font.Font(None, 24)
 
 # Main checkpoints data
 checkpoints = [
-    {"name": "First Day of Classes", "date": "8-27-2024"},
+    {"name": "First Day of Classes", "date": "08-27-2024"},
     {"name": "Midterm Exams", "date": "10-15-2024"},
     {"name": "Fall Break", "date": "11-20-2024"},
     {"name": "Finals", "date": "12-05-2024"},
@@ -83,7 +83,8 @@ def display_text(text, color, x, y):
 
 
 def handle_checkpoint_screen(checkpoint_index):
-    pass
+    checkpoint_name = checkpoints[checkpoint_index]["name"]
+    display_text(checkpoint_name, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30)
 
 def check_stats():
     if gpa == 0 or mental_health == 0 or physical_health == 0:
@@ -91,9 +92,9 @@ def check_stats():
 
 def gameplay_screen():
     global mental_health, physical_health, gpa, date, days_passed, event
-    start_date = datetime.strptime("08-28-2024", "%m-%d-%Y")
+    start_date = datetime.strptime("08-27-2024", "%m-%d-%Y")
 
-    checkpoint_index = 0
+    checkpoint_index = 1
     event_popup_active = False
     # Main loop
     running = True
@@ -119,9 +120,10 @@ def gameplay_screen():
 
         # Main loop for game
         while checkpoint_index < len(checkpoints):
-            if date == checkpoints[checkpoint_index]["date"]:
+            if curr_date.date() == datetime.strptime(checkpoints[checkpoint_index]["date"], "%m-%d-%Y").date():
                 # Call handle_checkpoint_screen with the checkpoint data
                 handle_checkpoint_screen(checkpoints[checkpoint_index])
+                print("HELLO")
                 checkpoint_index += 1
                 break
             else:
@@ -134,7 +136,7 @@ def gameplay_screen():
                 pygame.display.update()
 
                 # Add a delay to control the game's speed
-                pygame.time.delay(1000)  # Adjust the delay as needed
+                pygame.time.delay(300)  # Adjust the delay as needed
 
                 # Random events
                 if random.random() < 0.05:
@@ -152,5 +154,4 @@ def gameplay_screen():
         pygame.display.update()
 
 
-# Run the gameplay screen
-gameplay_screen()
+

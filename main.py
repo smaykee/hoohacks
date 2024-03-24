@@ -2,7 +2,9 @@ import textwrap
 
 import pygame
 import sys
-import start_screen
+
+import options
+from gameplay import *
 
 # Initialize Pygame
 pygame.init()
@@ -11,7 +13,7 @@ pygame.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
-RED= (255,0,0)
+RED = (255, 0, 0)
 
 # Screen dimensions
 SCREEN_WIDTH = 800
@@ -38,6 +40,7 @@ def draw_text(text, font, color, x, y):
     text_rect.center = (x, y)
     screen.blit(text_surface, text_rect)
 
+
 def main_menu():
     while True:
         screen.fill(BLACK)
@@ -60,6 +63,7 @@ def main_menu():
                 elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+
 
 def options():
     running = True
@@ -88,20 +92,18 @@ def options():
                     num = event.key - pygame.K_1
                     handle_option(num)
 
+
 def handle_option(option_index):
     selected_option_text = options_list[option_index]
     if selected_option_text == "1. Begin Your Journey...":
-        start_screen.start_game()
+        gameplay_screen()
     elif selected_option_text == "2. Learn More":
-        start_screen.show_info()
+        options.show_info()
     elif selected_option_text == "3. Turn Back":
         main_menu()
     elif selected_option_text == "4. Exit":
         pygame.quit()
         sys.exit()
-
-
-
 
 
 def main():
@@ -114,6 +116,7 @@ def main():
                 pygame.mixer.stop()  # Stop main menu music if playing
         elif current_state == "options":
             options()
+
 
 if __name__ == "__main__":
     main()
