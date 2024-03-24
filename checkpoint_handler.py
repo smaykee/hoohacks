@@ -1,3 +1,5 @@
+import pygame
+
 from gameplay import *
 
 # Initialize Pygame
@@ -55,9 +57,10 @@ def handle_checkpoint_screen(checkpoint_index):
     screen.fill(WHITE)
     display_text("Checkpoint", BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
     display_text(checkpoint_name, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30)
-    display_text("Press Enter to observe", BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 90)
+    display_text("Press Enter to observe, Spacebar to continue", BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 90)
     pygame.display.update()
-    while True:
+    running = True
+    while running:
         for evt in pygame.event.get():
             if evt.type == pygame.QUIT:
                 pygame.quit()
@@ -66,6 +69,7 @@ def handle_checkpoint_screen(checkpoint_index):
                 if evt.key == pygame.K_RETURN:
                     start_game()  # Exit the loop when user clicks on the popup
                     pygame.display.update()
-
+                if evt.key == pygame.K_SPACE:
+                    running = False
         # Clear the screen
         screen.fill(WHITE)

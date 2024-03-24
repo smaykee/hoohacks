@@ -20,6 +20,8 @@ font = pygame.font.Font(None, 36)
 
 def game_over_screen():
     running = True
+    clock = pygame.time.Clock()
+    elapsed_time = 0
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Close button clicked
@@ -27,11 +29,8 @@ def game_over_screen():
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                # Reset the game or return to start screen
-                # Here you can implement the functionality to reset the game or return to the start screen
-                # For example, you can have a function that resets the game state and returns to the start screen
-                # reset_game()
                 running = False  # Exit the loop and return to gameplay screen
+
 
         # Clear the screen
         screen.fill(WHITE)
@@ -48,6 +47,12 @@ def game_over_screen():
 
         # Update the display
         pygame.display.update()
+
+        elapsed_time += clock.tick_busy_loop(60)  # Limit frame rate to 60 FPS and get elapsed time
+
+        # If elapsed time exceeds 3 seconds (3000 milliseconds), exit the loop
+        if elapsed_time >= 3000:
+            running = False
 
 
 # Run the game over screen
