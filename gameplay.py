@@ -7,6 +7,7 @@ from checkpoint_handler import *
 from event_handler import *
 from gameover import *
 from main import *
+from list import *
 
 # Initialize Pygame
 pygame.init()
@@ -82,10 +83,6 @@ def display_text(text, color, x, y):
     # Update player stats based on game events, actions, etc.
 
 
-def handle_checkpoint_screen(checkpoint_index):
-    checkpoint_name = checkpoints[checkpoint_index]["name"]
-    display_text(checkpoint_name, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30)
-
 def check_stats():
     if gpa == 0 or mental_health == 0 or physical_health == 0:
         game_over_screen()
@@ -104,6 +101,10 @@ def gameplay_screen():
             if event.type == pygame.QUIT:  # close button
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    list.start_game()  # Exit the loop when user clicks on the popup
+                    pygame.display.update()
 
         # Clear the screen
         screen.fill(WHITE)
@@ -122,8 +123,7 @@ def gameplay_screen():
         while checkpoint_index < len(checkpoints):
             if curr_date.date() == datetime.strptime(checkpoints[checkpoint_index]["date"], "%m-%d-%Y").date():
                 # Call handle_checkpoint_screen with the checkpoint data
-                handle_checkpoint_screen(checkpoints[checkpoint_index])
-                print("HELLO")
+                handle_checkpoint_screen(checkpoint_index)
                 checkpoint_index += 1
                 break
             else:
@@ -145,6 +145,8 @@ def gameplay_screen():
                     handle_event(event, gpa, mental_health, physical_health)
                     read_from_file()
                     event_popup_active = True
+
+
                 else:
                     event_popup_active = False
                 break

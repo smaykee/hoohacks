@@ -34,12 +34,12 @@ def modify_file(stat_name, num):
     with open("stats.txt", "w") as file:
         json.dump(data, file)
 
+
 def display_text(text, color, x, y):
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
     text_rect.center = (x, y)
     screen.blit(text_surface, text_rect)
-
 
 
 def handle_event(event_data, gpa, mental_health, physical_health):
@@ -49,8 +49,9 @@ def handle_event(event_data, gpa, mental_health, physical_health):
             if evt.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if evt.type == pygame.MOUSEBUTTONDOWN:
-                running = False  # Exit the loop when user clicks on the popup
+            if evt.type == pygame.KEYDOWN:
+                if evt.key == pygame.K_RETURN:
+                    running = False  # Exit the loop when user clicks on the popup
 
         # Clear the screen
         screen.fill(WHITE)
@@ -59,6 +60,7 @@ def handle_event(event_data, gpa, mental_health, physical_health):
         display_text("Event Pop-up", BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         display_text(event_data["name"], BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 30)
         display_text(event_data["desc"], BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 60)
+        display_text("Press Enter to continue", BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 90)
 
         # Update the display
         pygame.display.update()
